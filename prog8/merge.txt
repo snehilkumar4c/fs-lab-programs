@@ -1,0 +1,17 @@
+ant
+apple
+ball
+bill
+carrot
+fish
+girl
+hammer
+hand
+hill
+kill
+mango
+orange
+rat
+stone
+sun
+top
