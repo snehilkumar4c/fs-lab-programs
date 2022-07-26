@@ -31,6 +31,7 @@ void student::pack() {
     
     int len = strlen(buffer);
     while(len < 27) {
+        // hehhehehe
         strcat(buffer, "#");
         len++;
     }
