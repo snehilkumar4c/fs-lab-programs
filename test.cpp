@@ -1,8 +1,8 @@
 #include<iostream>
-#include<fstream>
-#include<conio.h>
 #include<string.h>
 #include<process.h>
+#include<conio.h>
+#include<fstream>
 
 using namespace std;
 
@@ -11,56 +11,53 @@ int n = 0;
 char fname[10];
 
 class student {
-    private: char usn[10], name[10], branch[15];
-    public: void pack(); 
+    private: char usn[15], name[15], branch[5];
+    public: void pack();
             void unpack(char[]);
             void display();
             void search();
 };
 
 void student::pack() {
-    char buffer[28];
-    cout<<"Enter usn, name, branch: ";
+    char buffer[100];
+    cout<<"enter usn, name and branch: \n";
     cin>>usn>>name>>branch;
-    strcpy(buffer, usn);
-    strcat(buffer, "|");
-    strcat(buffer, name);
-    strcat(buffer, "|");
-    strcat(buffer, branch);
-    strcat(buffer, "|");
-    
+    strcpy(buffer,usn);
+    strcat(buffer,"|");
+    strcat(buffer,name);
+    strcat(buffer,"|");
+    strcat(buffer,branch);
+    strcat(buffer,"|");
+
     int len = strlen(buffer);
     while(len < 27) {
-        // hehhehehe
         strcat(buffer, "#");
         len++;
     }
+
     buffer[27] = '\0';
     fp<<buffer<<"\n";
 }
 
 void student::unpack(char buffer[]) {
     char *t;
-    // char buffer[28];
-
     t = strtok(buffer,"|");
-    cout<<"usn: "<<t<<endl;
+    cout<<"usn: \n"<<t<<endl;
     t = strtok(NULL,"|");
-    cout<<"name: "<<t<<endl;
+    cout<<"name: \n"<<t<<endl;
     t = strtok(NULL,"|");
-    cout<<"branch: "<<t<<endl;
+    cout<<"branch: \n"<<t<<endl;
 }
 
 void student::display() {
-    char buffer[28];
-
+    char buffer[100];
+    
     if(n == 0) {
         cout<<"no records";
         return;
     }
-
-    cout<<"file contents are: "<<endl;
-    fp.open(fname, ios::in);
+    cout<<"file contents: \n";
+    fp.open(fname,ios::in);
     for(int i = 0; i < n; i++) {
         fp>>buffer;
         unpack(buffer);
@@ -70,36 +67,37 @@ void student::display() {
 }
 
 void student::search() {
-    char buffer[28],temp[28];
+    char buffer[100], temp[100];
     char *usn;
     char key[15];
-    int choice;
+    int ch;
 
-    cout<<"enter the usn to be searched: ";
+    cout<<"enter usn to search: \n";
     cin>>key;
 
     fp.open(fname,ios::in);
-    for(int i = 1; i <= n; i++) {
+    for(int i = 0; i < n; i++) {
         fp>>buffer;
-        strcpy(temp,buffer);
-        usn = strtok(buffer,"|");
-        if(strcmp(key,usn) == 0) {
+        strcpy(temp, buffer);
+        usn = strtok(buffer, "|");
+        if(strcmp(key, usn) == 0) {
             cout<<"record found";
             unpack(buffer);
-            cout<<"do you want to modify:"<<endl;
-            cout<<"enter you choice: 1.yes 2.no"<<endl;
-            cin>>choice;
-            if(choice == 1) {
-                fp.seekp(-27,ios::cur);
+            cout<<"want to modify?";
+            cout<<"enter choice: \n1.yes\n2.no\n";
+            cin>>ch;
+
+            if(ch == 1) {
+                fp.seekp(-27, ios::cur);
                 pack();
             }
             fp.close();
             return;
         }
+        cout<<"no records";
+        fp.close();
+        return;
     }
-    cout<<"Record not found"<<endl;
-    fp.close();
-    return;
 }
 
 int main() {

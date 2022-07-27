@@ -38,13 +38,13 @@ int main() {
             }
             exit(0);
         }
-            else {
-                fp1<<name[low]<<"\n";
-                cout<<name[low]<<"\n";
-                fp[low]>>name[low];
-                if(fp[low].fail()) {
-                    strcpy(name[low],"~");
-                }
+        else {
+            fp1<<name[low]<<"\n";
+            cout<<name[low]<<"\n";
+            fp[low]>>name[low];
+            if(fp[low].fail()) {
+                strcpy(name[low],"~");
+            }
         }
     }
 }

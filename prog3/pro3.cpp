@@ -78,7 +78,7 @@ void student::search(){
     fp1.open(fname,ios::in);
     fp2.open("out.txt",ios::out);
 
-    for(int i = 1; i <= n; i++) {    //check for i = 0 also after execution
+    for(int i = 0; i < n; i++) {    //check for i = 0 also after execution
         fp1>>buffer;
         strcpy(temp, buffer);
         usn = strtok(buffer, "|");
@@ -86,7 +86,7 @@ void student::search(){
         if(strcmp(usn, key) == 0) {
             cout<<"record found";
             unpack(buffer); 
-            cout<<"want to modify"<<endl;
+            cout<<"want to modify \n";
             cout<<"enter choice: \n1.yes \n2.no \n";
             cin>>ch;
 
@@ -129,8 +129,8 @@ int main() {
     fp1.close();
 
     for(;;) {
-        cout<<"\n1.insert\n2.display\n3.search\n4.exit"<<endl;
-        cout<<"enter choice: "<<endl;
+        cout<<"\n1.insert\n2.display\n3.search\n4.exit \n";
+        cout<<"enter choice: \n";
         cin>>ch;
 
         switch (ch)
